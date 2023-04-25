@@ -39,8 +39,8 @@
   <section id="topbar" class="d-none d-lg-block">
     <div class="container clearfix">
       <div class="contact-info float-left">
-        <i class="fa fa-envelope-o"></i> <a href="mailto:contact@example.com">transpot@gmail.com</a>
-        <i class="fa fa-phone"></i> +91 8003649945
+        <i class="fa fa-envelope-o"></i> <a href="mailto:contact@example.com">dbmsgroup@thapar.edu</a>
+        <i class="fa fa-phone"></i> +91 8928623041
       </div>
     </div>
   </section>
@@ -52,7 +52,7 @@
     <div class="container">
 
       <div id="logo" class="pull-left">
-        <h1><a href="#body" class="scrollto">Tran<span>Sport</span></a></h1>
+        <h1><a href="#body" class="scrollto">Travel<span>Buddy</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
       </div>
@@ -76,19 +76,19 @@
   <section id="intro">
 
     <div class="intro-content">
-      <h2>Making <span>your Ride</span><br>happen!</h2>
+      <h2>Get your Ride<br>Now!</h2>
       <div>
         <a href="profile.php" class="btn-get-started scrollto">Ticket Book</a>
       </div>
     </div>
 
     <div id="intro-carousel" class="owl-carousel" >
-      <div class="item" style="background-image: url('img/bus1.jpg');"></div>
-      <div class="item" style="background-image: url('img/bus2.jpg');"></div>
-      <div class="item" style="background-image: url('img/bus3.jpg');"></div>
-      <div class="item" style="background-image: url('img/bus4.jpg');"></div>
-      <div class="item" style="background-image: url('img/bus5.jpg');"></div>
-      <div class="item" style="background-image: url('img/bus6.jpg');"></div>
+      <div class="item" style="background-image: url('img/buss1.jpg');"></div>
+      <div class="item" style="background-image: url('img/buss2.jpg');"></div>
+      <div class="item" style="background-image: url('img/buss3.jpeg');"></div>
+      <div class="item" style="background-image: url('img/buss4.jpg');"></div>
+      <div class="item" style="background-image: url('img/buss5.jpg');"></div>
+      <div class="item" style="background-image: url('img/buss6.jpg');"></div>
       <div class="item" style="background-image: url('img/bus7.jpg');"></div>
       <div class="item" style="background-image: url('img/intro-carousel/5.jpg');"></div>
     </div>
@@ -100,7 +100,7 @@
       <div class="container">
         <div class="section-header">
           <h2>Our Portfolio</h2>
-          <p>“The Impulse to Travel is one of the hopeful symptoms of life” ... </p>
+          <p>“Travel is important in life” ... </p>
         </div>
       </div>
 
@@ -109,8 +109,8 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="portfolio-item wow fadeInUp">
-              <a href="img/port1.jpg" class="portfolio-popup">
-                <img src="img/port1.jpg" alt="" style="height:350px;">
+              <a href="img/porta.jpg" class="portfolio-popup">
+                <img src="img/porta.jpg" alt="" style="height:350px;">
                 <div class="portfolio-overlay">
                   <div class="portfolio-info"><h2 class="wow fadeInUp"></h2></div>
                 </div>
@@ -120,8 +120,8 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="portfolio-item wow fadeInUp">
-              <a href="img/port2.jpg" class="portfolio-popup">
-                <img src="img/port2.jpg" alt="" style="height:350px;">
+              <a href="img/portb.jpg" class="portfolio-popup">
+                <img src="img/portb.jpg" alt="" style="height:350px;">
                 <div class="portfolio-overlay">
                   <div class="portfolio-info"><h2 class="wow fadeInUp"></h2></div>
                 </div>
@@ -131,8 +131,8 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="portfolio-item wow fadeInUp">
-              <a href="img/port3.jpg" class="portfolio-popup">
-                <img src="img/port3.jpg" alt=""style="height:350px;">
+              <a href="img/portc.jpg" class="portfolio-popup">
+                <img src="img/portc.jpg" alt=""style="height:350px;">
                 <div class="portfolio-overlay">
                   <div class="portfolio-info"><h2 class="wow fadeInUp"></h2></div>
                 </div>
@@ -142,8 +142,8 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="portfolio-item wow fadeInUp">
-              <a href="img/port4.jpg" class="portfolio-popup">
-                <img src="img/port4.jpg" alt=""style="height:350px;">
+              <a href="img/portd.jpg" class="portfolio-popup">
+                <img src="img/portd.jpg" alt=""style="height:350px;">
                 <div class="portfolio-overlay">
                   <div class="portfolio-info"><h2 class="wow fadeInUp"></h2></div>
                 </div>
@@ -153,8 +153,8 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="portfolio-item wow fadeInUp">
-              <a href="img/port5.jpg" class="portfolio-popup">
-                <img src="img/port5.jpg" alt=""style="height:350px;">
+              <a href="img/porte.jpg" class="portfolio-popup">
+                <img src="img/porte.jpg" alt=""style="height:350px;">
                 <div class="portfolio-overlay">
                   <div class="portfolio-info"><h2 class="wow fadeInUp"></h2></div>
                 </div>
@@ -164,8 +164,8 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="portfolio-item wow fadeInUp">
-              <a href="img/port6.jpg" class="portfolio-popup">
-                <img src="img/port6.jpg" alt=""style="height:350px;">
+              <a href="img/portf.jpg" class="portfolio-popup">
+                <img src="img/portf.jpg" alt=""style="height:350px;">
                 <div class="portfolio-overlay">
                   <div class="portfolio-info"><h2 class="wow fadeInUp"></h2></div>
                 </div>
@@ -175,8 +175,8 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="portfolio-item wow fadeInUp">
-              <a href="img/port7.jpg" class="portfolio-popup">
-                <img src="img/port7.jpg" alt=""style="height:350px;">
+              <a href="img/portg.jpg" class="portfolio-popup">
+                <img src="img/portg.jpg" alt=""style="height:350px;">
                 <div class="portfolio-overlay">
                   <div class="portfolio-info"><h2 class="wow fadeInUp"></h2></div>
                 </div>
@@ -186,8 +186,8 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="portfolio-item wow fadeInUp">
-              <a href="img/port8.jpg" class="portfolio-popup">
-                <img src="img/port8.jpg" alt=""style="height:350px;">
+              <a href="img/porth.jpg" class="portfolio-popup">
+                <img src="img/porth.jpg" alt=""style="height:350px;">
                 <div class="portfolio-overlay">
                   <div class="portfolio-info"><h2 class="wow fadeInUp"></h2></div>
                 </div>
@@ -224,7 +224,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 about-img">
-             <img src="img/port3.jpg" alt="">
+             <img src="img/portc.jpg" alt="">
           </div>
 
          
