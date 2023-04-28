@@ -29,10 +29,10 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `abcd` (IN `push` INT)  NO SQL
 SELECT* from user_info$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `nishu` (IN `bus` INT)  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `kish` (IN `bus` INT)  NO SQL
 SELECT* from bus_details$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `raj` (IN `raj` INT)  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ak` (IN `raj` INT)  NO SQL
 SELECT* from ticket$$
 
 DELIMITER ;
