@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: April 22, 2023 at 06:33 AM
+-- Generation Time: Apr 22, 2023 at 06:33 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -29,10 +29,10 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `abcd` (IN `push` INT)  NO SQL
 SELECT* from user_info$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `kish` (IN `bus` INT)  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `nishu` (IN `bus` INT)  NO SQL
 SELECT* from bus_details$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ak` (IN `raj` INT)  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `raj` (IN `raj` INT)  NO SQL
 SELECT* from ticket$$
 
 DELIMITER ;
