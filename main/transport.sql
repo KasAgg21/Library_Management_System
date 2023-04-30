@@ -1,14 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 22, 2023 at 06:33 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Host: localhost
+-- Generation Time: Apr 30, 2023 at 12:54 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -21,19 +21,15 @@ SET time_zone = "+00:00";
 --
 -- Database: `transport`
 --
+CREATE DATABASE IF NOT EXISTS `transport` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `transport`;
 
 DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `abcd` (IN `push` INT)  NO SQL
-SELECT* from user_info$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `nishu` (IN `bus` INT)  NO SQL
-SELECT* from bus_details$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `raj` (IN `raj` INT)  NO SQL
-SELECT* from ticket$$
+DROP PROCEDURE IF EXISTS `abcd`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `abcd` (IN `push` INT)  NO SQL SELECT* from user_info$$
 
 DELIMITER ;
 
@@ -43,17 +39,23 @@ DELIMITER ;
 -- Table structure for table `admin`
 --
 
-CREATE TABLE `admin` (
-  `a_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `a_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
-  `psw` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `psw` varchar(30) NOT NULL,
+  PRIMARY KEY (`a_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `admin`:
+--
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`a_id`, `name`, `psw`) VALUES
+INSERT DELAYED IGNORE INTO `admin` (`a_id`, `name`, `psw`) VALUES
 (1, 'admin', 'admin');
 
 -- --------------------------------------------------------
@@ -62,22 +64,51 @@ INSERT INTO `admin` (`a_id`, `name`, `psw`) VALUES
 -- Table structure for table `booking_det`
 --
 
-CREATE TABLE `booking_det` (
+DROP TABLE IF EXISTS `booking_det`;
+CREATE TABLE IF NOT EXISTS `booking_det` (
   `bus_id` int(11) NOT NULL,
   `vacant` int(11) NOT NULL,
   `jdate` varchar(30) NOT NULL,
   `bfrom` varchar(30) NOT NULL,
   `bto` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `booking_det`:
+--
 
 --
 -- Dumping data for table `booking_det`
 --
 
-INSERT INTO `booking_det` (`bus_id`, `vacant`, `jdate`, `bfrom`, `bto`) VALUES
-(3, 75, '2019-11-16', 'Bhind ', 'Delhi'),
-(2, 78, '2019-11-21', 'Bhind ', 'Delhi'),
-(5, 70, '2019-11-23', 'Bangalore', 'Ladakh');
+INSERT DELAYED IGNORE INTO `booking_det` (`bus_id`, `vacant`, `jdate`, `bfrom`, `bto`) VALUES
+(3, 75, '2023-04-11', 'Bhind ', 'Delhi'),
+(2, 74, '2023-04-16', 'Bhind ', 'Delhi'),
+(5, 70, '2023-04-21', 'Bangalore', 'Ladakh'),
+(2, 76, '2023-09-21', 'Bhind ', 'Delhi'),
+(2, 75, '2023-04-21', 'Patiala', 'Delhi');
+
+--
+-- Triggers `booking_det`
+--
+DROP TRIGGER IF EXISTS `booking_de`;
+DELIMITER $$
+CREATE TRIGGER `booking_de` BEFORE DELETE ON `booking_det` FOR EACH ROW INSERT INTO log(table_name, columns_changed)
+    VALUES ('booking', 'bus_id')
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `booking_in`;
+DELIMITER $$
+CREATE TRIGGER `booking_in` BEFORE INSERT ON `booking_det` FOR EACH ROW INSERT INTO log(table_name, columns_changed)
+    VALUES ('booking', 'bus_id')
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `booking_up`;
+DELIMITER $$
+CREATE TRIGGER `booking_up` BEFORE UPDATE ON `booking_det` FOR EACH ROW INSERT INTO log(table_name, columns_changed)
+    VALUES ('booking', 'bus_id')
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -85,8 +116,9 @@ INSERT INTO `booking_det` (`bus_id`, `vacant`, `jdate`, `bfrom`, `bto`) VALUES
 -- Table structure for table `bus_details`
 --
 
-CREATE TABLE `bus_details` (
-  `bus_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `bus_details`;
+CREATE TABLE IF NOT EXISTS `bus_details` (
+  `bus_id` int(11) NOT NULL AUTO_INCREMENT,
   `bname` varchar(30) NOT NULL,
   `bno` varchar(20) NOT NULL,
   `bfrom` varchar(30) NOT NULL,
@@ -94,18 +126,105 @@ CREATE TABLE `bus_details` (
   `time` varchar(10) NOT NULL,
   `type` varchar(10) NOT NULL,
   `no_seat` int(11) NOT NULL,
-  `fare` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `fare` int(11) NOT NULL,
+  PRIMARY KEY (`bus_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `bus_details`:
+--
 
 --
 -- Dumping data for table `bus_details`
 --
 
-INSERT INTO `bus_details` (`bus_id`, `bname`, `bno`, `bfrom`, `bto`, `time`, `type`, `no_seat`, `fare`) VALUES
-(2, 'Toofan Express', 'mp 30 sc 0137', 'Bhind ', 'Delhi', '6pm', 'Ac', 80, 1000),
-(3, 'Satabdi Express', 'MP07 Se1212', 'Bhind ', 'Delhi', '7 pm', 'Non Ac', 80, 500),
-(4, 'Janrath', 'up16sc1212', 'Lucknow', 'gorakhpur', '6am', 'Ac', 80, 350),
-(5, 'Taj express', 'mp30Ka1213', 'Bangalore', 'Ladakh', '8AM', 'Ac', 80, 5000);
+INSERT DELAYED IGNORE INTO `bus_details` (`bus_id`, `bname`, `bno`, `bfrom`, `bto`, `time`, `type`, `no_seat`, `fare`) VALUES
+(2, 'Bijli R', '246789', 'Patiala', 'Delhi', '6pm', 'Ac', 80, 1000),
+(3, 'PRTC', '29567', 'Patiala', 'Bathinda', '7 pm', 'Non Ac', 80, 400),
+(5, 'express', '356983', 'Patiala', 'Hydrabad', '8AM', 'Ac', 80, 5000),
+(6, 'Orbit', '19946', 'Patiala', 'Chandigarh', '9:40 am', 'Ac', 47, 100);
+
+--
+-- Triggers `bus_details`
+--
+DROP TRIGGER IF EXISTS `bus_de`;
+DELIMITER $$
+CREATE TRIGGER `bus_de` AFTER DELETE ON `bus_details` FOR EACH ROW INSERT INTO log(table_name, columns_changed)
+    VALUES ('bus', 'bus_id')
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `bus_in`;
+DELIMITER $$
+CREATE TRIGGER `bus_in` AFTER INSERT ON `bus_details` FOR EACH ROW INSERT INTO log(table_name, columns_changed)
+    VALUES ('bus', 'bus_id')
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `bus_up`;
+DELIMITER $$
+CREATE TRIGGER `bus_up` AFTER UPDATE ON `bus_details` FOR EACH ROW INSERT INTO log(table_name, columns_changed)
+    VALUES ('bus', 'bus_id')
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+DROP TABLE IF EXISTS `feedback`;
+CREATE TABLE IF NOT EXISTS `feedback` (
+  `name` varchar(30) NOT NULL,
+  `uname` varchar(30) NOT NULL,
+  `rating` int(2) NOT NULL,
+  `phno` int(10) NOT NULL,
+  `comm` text NOT NULL,
+  PRIMARY KEY (`uname`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `feedback`:
+--
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT DELAYED IGNORE INTO `feedback` (`name`, `uname`, `rating`, `phno`, `comm`) VALUES
+('ka', 'ka', 9, 933586, 'Good');
+
+--
+-- Triggers `feedback`
+--
+DROP TRIGGER IF EXISTS `feedback_in`;
+DELIMITER $$
+CREATE TRIGGER `feedback_in` AFTER INSERT ON `feedback` FOR EACH ROW INSERT INTO log(table_name, columns_changed)
+    VALUES ('feedback', 'name')
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log`
+--
+
+DROP TABLE IF EXISTS `log`;
+CREATE TABLE IF NOT EXISTS `log` (
+  `table_name` varchar(30) NOT NULL,
+  `columns_changed` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `log`:
+--
+
+--
+-- Dumping data for table `log`
+--
+
+INSERT DELAYED IGNORE INTO `log` (`table_name`, `columns_changed`) VALUES
+('ticket', 'uid');
 
 -- --------------------------------------------------------
 
@@ -113,8 +232,9 @@ INSERT INTO `bus_details` (`bus_id`, `bname`, `bno`, `bfrom`, `bto`, `time`, `ty
 -- Table structure for table `ticket`
 --
 
-CREATE TABLE `ticket` (
-  `tid` int(11) NOT NULL,
+DROP TABLE IF EXISTS `ticket`;
+CREATE TABLE IF NOT EXISTS `ticket` (
+  `tid` int(11) NOT NULL AUTO_INCREMENT,
   `bus_id` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
   `seat_no` varchar(30) NOT NULL,
@@ -122,18 +242,32 @@ CREATE TABLE `ticket` (
   `ticket_status` varchar(30) NOT NULL,
   `jdate` varchar(30) NOT NULL,
   `booking_date` date NOT NULL,
-  `pname` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `pname` varchar(30) NOT NULL,
+  PRIMARY KEY (`tid`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `ticket`:
+--
 
 --
 -- Dumping data for table `ticket`
 --
 
-INSERT INTO `ticket` (`tid`, `bus_id`, `uid`, `seat_no`, `no_seat`, `ticket_status`, `jdate`, `booking_date`, `pname`) VALUES
-(1, 3, 1, ' 1 2', 2, 'Conform', '2019-11-16', '2019-11-17', 'rajesh'),
-(2, 2, 1, ' 1 2', 2, 'Conform', '2019-11-21', '2019-11-21', 'Rajesh'),
-(3, 5, 2, ' 1 2 3 4 5 6 7 8 9 10', 10, 'Conform', '2019-11-23', '2019-11-21', 'Nishant'),
-(4, 3, 3, ' 3 4 5', 3, 'Conform', '2019-11-16', '2019-11-21', 'Rajeev Kumar');
+INSERT DELAYED IGNORE INTO `ticket` (`tid`, `bus_id`, `uid`, `seat_no`, `no_seat`, `ticket_status`, `jdate`, `booking_date`, `pname`) VALUES
+(5, 2, 4, ' 3 4 5 6', 4, 'Conform', '2023-04-16', '2023-04-25', 'Kashish'),
+(6, 2, 4, ' 1 2 3 4', 4, 'Conform', '2023-09-21', '2023-04-28', 'ak'),
+(7, 2, 5, ' 1 2 3 4 5', 5, 'Conform', '2023-04-21', '2023-04-28', 'Kashish Aggarwal ');
+
+--
+-- Triggers `ticket`
+--
+DROP TRIGGER IF EXISTS `ticket_in`;
+DELIMITER $$
+CREATE TRIGGER `ticket_in` AFTER INSERT ON `ticket` FOR EACH ROW INSERT INTO log(table_name, columns_changed)
+    VALUES ('ticket', 'tid')
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -141,80 +275,86 @@ INSERT INTO `ticket` (`tid`, `bus_id`, `uid`, `seat_no`, `no_seat`, `ticket_stat
 -- Table structure for table `user_info`
 --
 
-CREATE TABLE `user_info` (
-  `uid` int(11) NOT NULL,
+DROP TABLE IF EXISTS `user_info`;
+CREATE TABLE IF NOT EXISTS `user_info` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `uname` varchar(30) NOT NULL,
   `age` varchar(30) NOT NULL,
   `adhar_no` varchar(30) NOT NULL,
   `psw` varchar(30) NOT NULL,
-  `email` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `email` varchar(50) NOT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `user_info`:
+--
 
 --
 -- Dumping data for table `user_info`
 --
 
-INSERT INTO `user_info` (`uid`, `name`, `uname`, `age`, `adhar_no`, `psw`, `email`) VALUES
-(1, 'Rajesh', 'rajesh', '22', '123456', 'rajesh', 'raj@gmail.com'),
-(2, 'Nishant', 'nishant', '22', '12345', 'nishant', 'ni@gmail.com'),
-(3, 'Rajeev Kumar', 'rajeev', '23', '1234567', 'rajeev', 'ra@gmail.com');
+INSERT DELAYED IGNORE INTO `user_info` (`uid`, `name`, `uname`, `age`, `adhar_no`, `psw`, `email`) VALUES
+(4, 'Kashish Aggarwal ', 'ka', '21', '2567', 'ka', 'agg@m.com'),
+(5, 'kASD', 'KAS', '23', '1435787', 'KAS', 'A@M.COM'),
+(6, 'Kashish Aggarwal ', 'k', '23', '345678', 'k', 'k@gmail.com');
 
 --
--- Indexes for dumped tables
+-- Triggers `user_info`
 --
+DROP TRIGGER IF EXISTS `user_in`;
+DELIMITER $$
+CREATE TRIGGER `user_in` AFTER INSERT ON `user_info` FOR EACH ROW INSERT INTO log(table_name, columns_changed)
+    VALUES ('user', 'uid')
+$$
+DELIMITER ;
+
 
 --
--- Indexes for table `admin`
+-- Metadata
 --
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`a_id`);
+USE `phpmyadmin`;
 
 --
--- Indexes for table `bus_details`
---
-ALTER TABLE `bus_details`
-  ADD PRIMARY KEY (`bus_id`);
-
---
--- Indexes for table `ticket`
---
-ALTER TABLE `ticket`
-  ADD PRIMARY KEY (`tid`);
-
---
--- Indexes for table `user_info`
---
-ALTER TABLE `user_info`
-  ADD PRIMARY KEY (`uid`);
-
---
--- AUTO_INCREMENT for dumped tables
+-- Metadata for table admin
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- Metadata for table booking_det
 --
-ALTER TABLE `admin`
-  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `bus_details`
+-- Dumping data for table `pma__table_uiprefs`
 --
-ALTER TABLE `bus_details`
-  MODIFY `bus_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+INSERT DELAYED IGNORE INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
+('root', 'transport', 'booking_det', '{\"sorted_col\":\"`booking_det`.`bfrom` DESC\"}', '2023-04-25 09:53:23');
 
 --
--- AUTO_INCREMENT for table `ticket`
+-- Metadata for table bus_details
 --
-ALTER TABLE `ticket`
-  MODIFY `tid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `user_info`
+-- Metadata for table feedback
 --
-ALTER TABLE `user_info`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Metadata for table log
+--
+
+--
+-- Metadata for table ticket
+--
+
+--
+-- Metadata for table user_info
+--
+
+--
+-- Metadata for database transport
+--
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
