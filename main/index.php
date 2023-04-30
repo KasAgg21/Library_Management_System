@@ -63,8 +63,9 @@
           <li><a href="#about">About Us</a></li>
           
           <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="registration/feedback.php">Feedback</a></li>
           <li><a href="registration/admin.php">Admin</a></li>
-          <li><a href="registration/login.php">login</a></li>
+          <li><a href="registration/login.php">Login/SignUp</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
