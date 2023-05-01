@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 30, 2023 at 12:54 PM
+-- Generation Time: May 01, 2023 at 05:15 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -30,6 +30,32 @@ DELIMITER $$
 --
 DROP PROCEDURE IF EXISTS `abcd`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `abcd` (IN `push` INT)  NO SQL SELECT* from user_info$$
+
+DROP PROCEDURE IF EXISTS `kashish`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `kashish` ()   BEGIN
+  DECLARE done BOOLEAN DEFAULT FALSE;
+  DECLARE user_name VARCHAR(30);
+  DECLARE user_id INT;
+  DECLARE user_email VARCHAR(50);
+  DECLARE user_age INT;
+  DECLARE cur CURSOR FOR SELECT name, uid, email, age FROM user_info WHERE age > 50;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+  
+  OPEN cur;
+  
+  read_loop: LOOP
+    FETCH cur INTO user_name, user_id, user_email, user_age;
+    IF done THEN
+      LEAVE read_loop;
+    END IF;
+    
+    -- Do something with the fetched data
+    
+  END LOOP;
+  
+  CLOSE cur;
+  
+END$$
 
 DELIMITER ;
 
@@ -191,7 +217,8 @@ CREATE TABLE IF NOT EXISTS `feedback` (
 --
 
 INSERT DELAYED IGNORE INTO `feedback` (`name`, `uname`, `rating`, `phno`, `comm`) VALUES
-('ka', 'ka', 9, 933586, 'Good');
+('ka', 'ka', 9, 933586, 'Good'),
+('Kashish Aggarwal', 'kas', 8, 590830, 'Good');
 
 --
 -- Triggers `feedback`
@@ -224,7 +251,8 @@ CREATE TABLE IF NOT EXISTS `log` (
 --
 
 INSERT DELAYED IGNORE INTO `log` (`table_name`, `columns_changed`) VALUES
-('ticket', 'uid');
+('ticket', 'uid'),
+('feedback', 'name');
 
 -- --------------------------------------------------------
 
@@ -309,51 +337,6 @@ CREATE TRIGGER `user_in` AFTER INSERT ON `user_info` FOR EACH ROW INSERT INTO lo
     VALUES ('user', 'uid')
 $$
 DELIMITER ;
-
-
---
--- Metadata
---
-USE `phpmyadmin`;
-
---
--- Metadata for table admin
---
-
---
--- Metadata for table booking_det
---
-
---
--- Dumping data for table `pma__table_uiprefs`
---
-
-INSERT DELAYED IGNORE INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
-('root', 'transport', 'booking_det', '{\"sorted_col\":\"`booking_det`.`bfrom` DESC\"}', '2023-04-25 09:53:23');
-
---
--- Metadata for table bus_details
---
-
---
--- Metadata for table feedback
---
-
---
--- Metadata for table log
---
-
---
--- Metadata for table ticket
---
-
---
--- Metadata for table user_info
---
-
---
--- Metadata for database transport
---
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
