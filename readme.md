@@ -1,1 +1,1 @@
-
+This project aims to develop a web-based bus travel management system that allows users to efficiently plan, book, and manage their buses. The system provide a user-friendly interface that enables users to search for buses. It also allow users to book and pay for their bus arrangements through the website.
